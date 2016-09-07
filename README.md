@@ -1,15 +1,7 @@
 # SPSwiftExtensions
 
-[![CI Status](http://img.shields.io/travis/sergey petrachkov/SPSwiftExtensions.svg?style=flat)](https://travis-ci.org/sergey petrachkov/SPSwiftExtensions)
-[![Version](https://img.shields.io/cocoapods/v/SPSwiftExtensions.svg?style=flat)](http://cocoapods.org/pods/SPSwiftExtensions)
-[![License](https://img.shields.io/cocoapods/l/SPSwiftExtensions.svg?style=flat)](http://cocoapods.org/pods/SPSwiftExtensions)
-[![Platform](https://img.shields.io/cocoapods/p/SPSwiftExtensions.svg?style=flat)](http://cocoapods.org/pods/SPSwiftExtensions)
-
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
+iOS version >= 8.0 but could work with lower versions :)
 
 ## Installation
 
