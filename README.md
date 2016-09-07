@@ -17,7 +17,7 @@ SPSwiftExtensions is available through [CocoaPods](http://cocoapods.org). To ins
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "SPSwiftExtensions"
+pod 'SPSwiftExtensions', :git => 'https://github.com/Petrachkov/SPSwiftExtensions.git'
 ```
 
 ## Author
