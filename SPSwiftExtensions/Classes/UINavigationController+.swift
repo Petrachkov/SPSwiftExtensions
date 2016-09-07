@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UINavigationController {
+public extension UINavigationController {
 	func pushViewControllerMoveInFromDown(viewController: UIViewController) {
 		let transition = CATransition();
 		transition.duration = 0.3;

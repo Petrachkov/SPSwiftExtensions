@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension UIImage{
+public extension UIImage{
 	/**
 	@brief This method should merge two images if possible or return bottom image without changes or nil
  

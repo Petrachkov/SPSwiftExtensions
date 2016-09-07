@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIDevice {
+public extension UIDevice {
 	var iPhone: Bool {
 		return UIDevice().userInterfaceIdiom == .Phone
 	}

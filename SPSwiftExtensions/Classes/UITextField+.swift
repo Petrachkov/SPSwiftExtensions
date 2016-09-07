@@ -11,7 +11,7 @@ import ObjectiveC
 import Foundation
 import QuartzCore
 
-extension UITextField {    
+public extension UITextField {
     func setCursorPosition(atRange : NSRange) {
         let start : UITextPosition = self.positionFromPosition(self.beginningOfDocument, offset: atRange.location)!
         let end : UITextPosition = self.positionFromPosition(start, offset: atRange.length)!

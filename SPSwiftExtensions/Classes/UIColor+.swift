@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
 	convenience init(rgbaColorCode:Int) {
 		let r = ((CGFloat)((rgbaColorCode & 0xff0000) >> 24)) / 255.0;
 		let g = ((CGFloat)((rgbaColorCode & 0xff0000) >> 16)) / 255.0;

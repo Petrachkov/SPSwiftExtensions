@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension UIView {
+public extension UIView {
 	//Hi, Ray Wenderlich! :)
 	//adds activity indicator to a view
 	func lock() {

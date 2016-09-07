@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension CGRect {
+public extension CGRect {
 	//Returns a point representing the rect center.
 	var center: CGPoint {
 		return CGPoint(x: self.midX, y: self.midY);

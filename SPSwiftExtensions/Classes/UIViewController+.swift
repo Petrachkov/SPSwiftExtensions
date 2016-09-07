@@ -10,7 +10,7 @@ import Foundation
 import AVKit
 import AVFoundation
 
-extension UIViewController {
+public extension UIViewController {
 	func setNavigationItemBackButtonImage(backIndicatorImageName backIndicatorImageName: String,
 									 backIndicatorTransitionMaskImageName : String,
 									 renderingMode : UIImageRenderingMode = .AlwaysOriginal) {
