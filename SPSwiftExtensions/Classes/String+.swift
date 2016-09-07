@@ -61,4 +61,24 @@ extension String {
 		let result = formatter.dateFromString(self)
 		return result!
 	}
+	/// returns string without words given in parameters array
+	func wordsFreeString(wordsArray:[String]) -> String{
+		var result = self;
+		for word in wordsArray {
+			result = result.stringByReplacingOccurrencesOfString(word, withString: "", options: .CaseInsensitiveSearch);
+		}
+		return result;
+	}
+	
+	func replaceOccurenciesByRegex(pattern: String) -> String {
+		var result = self;
+		let regex = try! NSRegularExpression(pattern: pattern,
+		                                     options: NSRegularExpressionOptions.CaseInsensitive)
+		let range = NSMakeRange(0, result.characters.count)
+		result = regex.stringByReplacingMatchesInString(result,
+		                                                options: [],
+		                                                range: range,
+		                                                withTemplate: "")
+		return result;
+	}
 }
