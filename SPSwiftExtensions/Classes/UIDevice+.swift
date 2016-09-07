@@ -8,28 +8,29 @@
 
 import Foundation
 import UIKit
+public enum ScreenType: String {
+	/// iPhone 4 and 4s screen
+	case iPhone4
+	/// iPhone 5, 5C and 5S screen
+	case iPhone5
+	/// iPhone 6 and 6S screen size
+	case iPhone6
+	/// iPhone 6 and 6S screen size (zoomed mode)
+	case iPhone6Zoomed
+	/// iPhone 6 Plus and 6S Plus screen size
+	case iPhone6Plus
+	/// iPhone 6 Plus and 6S Plus screen size (zoomed mode)
+	case iPhone6PlusZoomed
+	/// Unrecognized screen size
+	case unrecognized
+}
 
 public extension UIDevice {
 	var iPhone: Bool {
 		return UIDevice().userInterfaceIdiom == .Phone
 	}
 	
-	public enum ScreenType: String {
-		/// iPhone 4 and 4s screen
-		case iPhone4
-		/// iPhone 5, 5C and 5S screen
-		case iPhone5
-		/// iPhone 6 and 6S screen size
-		case iPhone6
-		/// iPhone 6 and 6S screen size (zoomed mode)
-		case iPhone6Zoomed
-		/// iPhone 6 Plus and 6S Plus screen size
-		case iPhone6Plus
-		/// iPhone 6 Plus and 6S Plus screen size (zoomed mode)
-		case iPhone6PlusZoomed
-		/// Unrecognized screen size
-		case unrecognized
-	}
+	
 	
 	/// Device screen type
 	var screenType: ScreenType {
