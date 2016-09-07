@@ -19,7 +19,7 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'SPSwiftExtensions', :git => 'https://github.com/Petrachkov/SPSwiftExtensions.git'
 ```
-
+Or just copy filer from 'Classes' folder and do whatever you want :)
 ## Author
 
 sergey petrachkov, petrachkovsergey@gmail.com
