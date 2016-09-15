@@ -70,7 +70,7 @@ public extension String {
 		return result;
 	}
 	
-	func replaceOccurenciesByRegex(pattern: String) -> String {
+    func replaceOccurenciesByRegex(pattern: String, template: String = "") -> String {
 		var result = self;
 		let regex = try! NSRegularExpression(pattern: pattern,
 		                                     options: NSRegularExpressionOptions.CaseInsensitive)
@@ -78,7 +78,7 @@ public extension String {
 		result = regex.stringByReplacingMatchesInString(result,
 		                                                options: [],
 		                                                range: range,
-		                                                withTemplate: "")
+		                                                withTemplate: template)
 		return result;
 	}
 }
