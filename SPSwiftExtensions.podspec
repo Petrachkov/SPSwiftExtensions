@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
 s.name             = 'SPSwiftExtensions'
-s.version          = '0.4.0'
+s.version          = '0.5.0'
 s.summary          = 'SPSwiftExtensions gives you a set of tools to work with standard classes.'
 
 # This description is used to generate tags and improve search results.
@@ -26,7 +26,7 @@ s.author           = { 'sergey petrachkov' => 'petrachkovsergey@gmail.com' }
 s.source           = { :git => 'https://github.com/Petrachkov/SPSwiftExtensions.git', :tag => s.version.to_s }
 # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-s.ios.deployment_target = '8.0'
+s.ios.deployment_target = '10.0'
 
 s.source_files = 'SPSwiftExtensions/Classes/**/*'
 
