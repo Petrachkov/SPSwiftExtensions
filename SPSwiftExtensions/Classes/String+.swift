@@ -1,84 +1,95 @@
 //
-//  String+.swift
-//  SwiftExtensions
+//  UIImage+.swift
+//  JustTaxi
 //
-//  Created by guys from Actonica studio on 25.05.16.
-//  Copyright © 2016 Actonica studio. All rights reserved.
+//  Created by sergey petrachkov on 30/08/16.
+//  Copyright © 2016 actonica. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-
-public extension String {
-	var localized : String {
-		return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
-	}
+public extension UIImage{
+	/**
+	@brief This method should merge two images if possible or return bottom image without changes or nil
+ 
+	@discussion This method accepts two strings that represent names of images
+ 
+	@param bottomImageName - main image that should be a basement of a new merged image
 	
-	func isEqualToStringCaseInsensitive(str2 : String) -> Bool {
-		let obj1 = self.uppercaseString
-		let obj2 = str2.uppercaseString
-		let result = obj1 == obj2
-		return result
-	}
+	@param topImageName - name of a top image
 	
-	func contains(substr : String) -> Bool {
-		if let _ = self.rangeOfString(substr) {
-			return true
+	@param topOffset - offset
+	*/
+	class func getMergedImage(_ bottomImageName: String, topImageName: String, topOffset : CGFloat = 3) -> UIImage? {
+		let bottomImage = UIImage(named: bottomImageName)
+		let topImage = UIImage(named: topImageName)
+		if (bottomImage == nil) {
+			return nil;
 		}
-		return false
-	}
-	
-	func containsCaseInsensitive(substr : String) -> Bool {
-		let str1 = self.uppercaseString
-		let str2 = substr.uppercaseString
-		let resut = str1.contains(str2)
-		return resut
-	}
-	
-	static func stringByIgnoreEmptyOrNil(str : String?) -> String {
-		let result : String = str ?? ""
-		return result
-	}
-	
-	subscript (i: Int) -> Character {
-		return self[self.startIndex.advancedBy(i)]
-	}
-	
-	subscript (i: Int) -> String {
-		return String(self[i] as Character)
-	}
-	
-	subscript (r: Range<Int>) -> String {
-		let start = startIndex.advancedBy(r.startIndex)
-		let end = start.advancedBy(r.endIndex - r.startIndex)
-		//return self[Range(start: start, end: end)]
-		return self[start..<end];
-	}
-	
-	func convertToDate(format : String) -> NSDate {
-		let formatter = NSDateFormatter()
-		formatter.dateFormat = format
-		let result = formatter.dateFromString(self)
-		return result!
-	}
-	/// returns string without words given in parameters array
-	func wordsFreeString(wordsArray:[String]) -> String{
-		var result = self;
-		for word in wordsArray {
-			result = result.stringByReplacingOccurrencesOfString(word, withString: "", options: .CaseInsensitiveSearch);
+		else if (topImage == nil) {
+			return bottomImage;
 		}
-		return result;
+		let size = CGSize(width: bottomImage!.size.width, height: bottomImage!.size.height)
+		UIGraphicsBeginImageContext(size)
+		let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+		bottomImage!.draw(in: areaSize)
+		topImage!.draw(in: CGRect(x: (bottomImage!.size.width - topImage!.size.width) / 2, y: topOffset, width: topImage!.size.width, height: topImage!.size.height), blendMode: CGBlendMode.normal, alpha: 0.8)
+		let mergedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+		UIGraphicsEndImageContext()
+		return mergedImage;
 	}
 	
-    func replaceOccurenciesByRegex(pattern: String, template: String = "") -> String {
-		var result = self;
-		let regex = try! NSRegularExpression(pattern: pattern,
-		                                     options: NSRegularExpressionOptions.CaseInsensitive)
-		let range = NSMakeRange(0, result.characters.count)
-		result = regex.stringByReplacingMatchesInString(result,
-		                                                options: [],
-		                                                range: range,
-		                                                withTemplate: template)
-		return result;
+	/**
+	@brief This method should merge two images
+ 
+	@discussion This method accepts two UIImage instances
+ 
+	@param bottomImage - main image that should be a basement of a new merged image
+	
+	@param topImage - a top image
+	
+	@param topOffset - offset
+	*/
+	class func getMergedImage(_ bottomImage: UIImage, topImage: UIImage, topOffset : CGFloat = 3) -> UIImage? {
+		var mergedImage : UIImage? = nil;
+		let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+		UIGraphicsBeginImageContext(size)
+		let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+		bottomImage.draw(in: areaSize)
+		topImage.draw(in: CGRect(x: (bottomImage.size.width - topImage.size.width) / 2, y: topOffset, width: topImage.size.width, height: topImage.size.height), blendMode: CGBlendMode.normal, alpha: 0.8)
+		mergedImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return mergedImage;
+	}
+	
+	class func getMergedMarcoPin(_ bottomImage: UIImage, topImage: UIImage, topOffset : CGFloat = 3.5) -> UIImage? {
+		let imageSize = bottomImage.size.width - topOffset*2;
+		var mergedImage : UIImage? = nil;
+		let size = CGSize(width: bottomImage.size.width, height: bottomImage.size.height)
+		UIGraphicsBeginImageContext(size)
+		let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+		bottomImage.draw(in: areaSize)
+		//TODO: figure out +0.5 magic number
+		topImage.getRoundedImage(imageSize/2, imageSize: CGSize(width: imageSize, height: imageSize)).draw(in: CGRect(x: topOffset + 0.5, y: topOffset, width: imageSize, height: imageSize), blendMode: CGBlendMode.normal, alpha: 1)
+		mergedImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return mergedImage;
+	}
+	
+	func getRoundedImage(_ cornerRadius: CGFloat, imageSize : CGSize) -> UIImage{
+		// Get your image somehow
+		var image = self;
+		// Begin a new image that will be the new image with the rounded corners
+		// (here with the size of an UIImageView)
+		UIGraphicsBeginImageContextWithOptions(imageSize, false, UIScreen.main.scale);
+		// Add a clip before drawing anything, in the shape of an rounded rect
+		UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 0, y: 0), size: imageSize), cornerRadius: cornerRadius).addClip();
+		// Draw your image
+		image.draw(in: CGRect(origin: CGPoint(x: 0, y: 0), size: imageSize))
+		// Get the image, here setting the UIImageView image
+		image = UIGraphicsGetImageFromCurrentImageContext()!;
+		// Lets forget about that we were drawing
+		UIGraphicsEndImageContext();
+		return image;
 	}
 }

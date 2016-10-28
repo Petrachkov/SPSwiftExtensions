@@ -21,63 +21,63 @@ public extension UIView {
 			lockView.backgroundColor = UIColor(white: 0.0, alpha: 0.75)
 			lockView.tag = 10
 			lockView.alpha = 0.0
-			let activity = UIActivityIndicatorView(activityIndicatorStyle: .White)
+			let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
 			activity.hidesWhenStopped = true
 			activity.center = lockView.center
 			lockView.addSubview(activity)
 			activity.startAnimating()
 			addSubview(lockView)
 			
-			UIView.animateWithDuration(0.2) {
+			UIView.animate(withDuration: 0.2, animations: {
 				lockView.alpha = 1.0
-			}
+			})
 		}
 	}
 	
 	func unlock() {
 		if let lockView = viewWithTag(10) {
-			UIView.animateWithDuration(0.2, animations: {
+			UIView.animate(withDuration: 0.2, animations: {
 				lockView.alpha = 0.0
-			}) { finished in
+			}, completion: { finished in
 				lockView.removeFromSuperview()
-			}
+			})
 		}
 	}
-
+	
 	/**
 	@brief adds blur effect to any view
 	*/
-	func addBlurEffect(toNavBar : Bool) {
+	func addBlurEffect(_ toNavBar : Bool) {
 		// Add blur view
 		var bounds = self.bounds as CGRect!
 		if(toNavBar){
 			bounds.offsetInPlace(dx: 0.0, dy: -20.0)
-			bounds.size.height = bounds.height + 20.0
+			bounds?.size.height = (bounds?.height)! + 20.0
 		}
 		let visualEffectView = UIView();
-		visualEffectView.frame = bounds
-		visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+		visualEffectView.frame = bounds!
+		visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		self.addSubview(visualEffectView)
 		visualEffectView.layer.zPosition -= 5;
 		if(toNavBar){
 			visualEffectView.tag = 0;
 		}
-		self.sendSubviewToBack(visualEffectView);
+		self.sendSubview(toBack: visualEffectView);
 	}
 	
 	func centerVertically(containerView view : UIView){
-		self.frame = CGRectMake(self.frame.origin.x, (view.frame.height - self.frame.height) / 2, self.frame.width, self.frame.height);
+		self.frame = CGRect(x: self.frame.origin.x, y: (view.frame.height - self.frame.height) / 2, width: self.frame.width, height: self.frame.height);
 	}
 	
 	func centerHorizontally(containerView view : UIView){
-		self.frame = CGRectMake((view.frame.width - self.frame.width) / 2,self.frame.origin.y, self.frame.width, self.frame.height);
+		self.frame = CGRect(x: (view.frame.width - self.frame.width) / 2,y: self.frame.origin.y, width: self.frame.width, height: self.frame.height);
 	}
 	
 	func centerVertically(anchorView view : UIView){
 		self.frame.origin.y = (view.frame.minY) + ((view.frame.height / 2) -  (self.frame.height / 2));
 	}
 	
-	func setWidth(width : CGFloat){
+	func setWidth(_ width : CGFloat){
 		self.frame.size.width = width;
 	}
 	
@@ -88,8 +88,8 @@ public extension UIView {
  
 	@param delta The value one wants to move the view
 	*/
-	func moveHorizontallyBy (delta: CGFloat){
-		self.frame = CGRectMake(self.frame.origin.x + delta, self.frame.origin.y, self.frame.width, self.frame.height);
+	func moveHorizontallyBy (_ delta: CGFloat){
+		self.frame = CGRect(x: self.frame.origin.x + delta, y: self.frame.origin.y, width: self.frame.width, height: self.frame.height);
 	}
 	/**
 	@brief It moves view left by given delta
@@ -98,7 +98,7 @@ public extension UIView {
  
 	@param left The value one wants to move the view
 	*/
-	func moveLeftBy(left : CGFloat){
+	func moveLeftBy(_ left : CGFloat){
 		self.moveHorizontallyBy(-left);
 	}
 	/**
@@ -108,7 +108,7 @@ public extension UIView {
  
 	@param right The value one wants to move the view
 	*/
-	func moveRightBy(right: CGFloat){
+	func moveRightBy(_ right: CGFloat){
 		self.moveHorizontallyBy(right);
 	}
 	/**
@@ -118,8 +118,8 @@ public extension UIView {
  
 	@param delta The value one wants to move the view
 	*/
-	func moveVerticallyBy(delta : CGFloat){
-		self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y + delta, self.frame.width, self.frame.height);
+	func moveVerticallyBy(_ delta : CGFloat){
+		self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y + delta, width: self.frame.width, height: self.frame.height);
 	}
 	/**
 	@brief It moves view up by given delta
@@ -128,7 +128,7 @@ public extension UIView {
  
 	@param up The value one wants to move the view
 	*/
-	func moveUpBy(up : CGFloat){
+	func moveUpBy(_ up : CGFloat){
 		self.moveVerticallyBy(-up);
 	}
 	/**
@@ -138,7 +138,7 @@ public extension UIView {
  
 	@param down The value one wants to move the view
 	*/
-	func moveDownBy(down : CGFloat){
+	func moveDownBy(_ down : CGFloat){
 		self.moveVerticallyBy(down);
 	}
 	
@@ -149,8 +149,8 @@ public extension UIView {
  
 	@param top The value one wants view to origin from vertically
 	*/
-	func setTop (top : CGFloat){
-		self.frame = CGRectMake(self.frame.origin.x, top, self.frame.width, self.frame.height);
+	func setTop (_ top : CGFloat){
+		self.frame = CGRect(x: self.frame.origin.x, y: top, width: self.frame.width, height: self.frame.height);
 	}
 	/**
 	@brief It places view below another
@@ -159,7 +159,7 @@ public extension UIView {
  
 	@param delta anotherView.bottom + delta
 	*/
-	func placeDownAfter(view : UIView, delta : CGFloat){
+	func placeDownAfter(_ view : UIView, delta : CGFloat){
 		self.setTop(view.frame.maxY + delta);
 	}
 	/**
@@ -169,17 +169,17 @@ public extension UIView {
  
 	@param delta anotherView.frame.right + delta
 	*/
-	func placeRightAfter(view : UIView, delta : CGFloat){
+	func placeRightAfter(_ view : UIView, delta : CGFloat){
 		self.moveRightBy(view.frame.maxX + delta);
 	}
 	
 	/// The color of the layer’s border. Animatable.
 	@IBInspectable var borderColor : UIColor? {
 		get {
-			return UIColor.init(CGColor: self.layer.borderColor!);
+			return UIColor.init(cgColor: self.layer.borderColor!);
 		}
 		set {
-			self.layer.borderColor = newValue?.CGColor;
+			self.layer.borderColor = newValue?.cgColor;
 		}
 	}
 	
@@ -216,10 +216,10 @@ public extension UIView {
 	/// The color of the layer’s shadow. Animatable.
 	@IBInspectable var shadowColor : UIColor? {
 		get {
-			return UIColor(CGColor: self.layer.shadowColor!);
+			return UIColor(cgColor: self.layer.shadowColor!);
 		}
 		set {
-			self.layer.shadowColor = newValue!.CGColor;
+			self.layer.shadowColor = newValue!.cgColor;
 		}
 	}
 	
@@ -266,28 +266,28 @@ public extension UIView {
 	
 	//MARK: - Extension methods
 	
-	func pinWithConstraint (viewToPinTo: UIView,
+	func pinWithConstraint (_ viewToPinTo: UIView,
 	                        attribute: NSLayoutAttribute,
 	                        constant: CGFloat = 0.0,
 	                        multiplier: CGFloat = 1.0,
-	                        layoutRelation: NSLayoutRelation = NSLayoutRelation.Equal,
+	                        layoutRelation: NSLayoutRelation = NSLayoutRelation.equal,
 	                        priority: UILayoutPriority = UILayoutPriorityRequired) -> NSLayoutConstraint? {
 		
 		var selfAttribute : NSLayoutAttribute;
-		selfAttribute = NSLayoutAttribute.NotAnAttribute;
+		selfAttribute = NSLayoutAttribute.notAnAttribute;
 		
-		if (attribute == .Left || attribute == .LeftMargin) {
-			selfAttribute = .Left;
-		} else if (attribute == .Top || attribute == .TopMargin) {
-			selfAttribute = .Top;
-		} else if (attribute == .Right || attribute == .RightMargin) {
-			selfAttribute = .Right;
-		} else if (attribute == .Bottom || attribute == .BottomMargin) {
-			selfAttribute = .Bottom;
-		} else if (attribute == .CenterX || attribute == .CenterXWithinMargins) {
-			selfAttribute = .CenterX;
-		} else if (attribute == .CenterY || attribute == .CenterYWithinMargins) {
-			selfAttribute = .CenterY;
+		if (attribute == .left || attribute == .leftMargin) {
+			selfAttribute = .left;
+		} else if (attribute == .top || attribute == .topMargin) {
+			selfAttribute = .top;
+		} else if (attribute == .right || attribute == .rightMargin) {
+			selfAttribute = .right;
+		} else if (attribute == .bottom || attribute == .bottomMargin) {
+			selfAttribute = .bottom;
+		} else if (attribute == .centerX || attribute == .centerXWithinMargins) {
+			selfAttribute = .centerX;
+		} else if (attribute == .centerY || attribute == .centerYWithinMargins) {
+			selfAttribute = .centerY;
 		} else {
 			return nil;
 		}
@@ -304,35 +304,35 @@ public extension UIView {
 		return constraint;
 	}
 	
-	func pinWithZeroInsets (viewToPinTo: UIView) -> [NSLayoutConstraint] {
+	func pinWithZeroInsets (_ viewToPinTo: UIView) -> [NSLayoutConstraint] {
 		return pinWithInsets(viewToPinTo, insets: UIEdgeInsets());
 	}
 	
-	func pinWithInsets (viewToPinTo: UIView, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
+	func pinWithInsets (_ viewToPinTo: UIView, insets: UIEdgeInsets) -> [NSLayoutConstraint] {
 		var constraints = [NSLayoutConstraint]();
 		let leftConstraint = pinWithConstraint(viewToPinTo,
-		                                       attribute: NSLayoutAttribute.Left,
+		                                       attribute: NSLayoutAttribute.left,
 		                                       constant: insets.left);
 		if (leftConstraint != nil) {
 			constraints.append(leftConstraint!);
 			viewToPinTo.addConstraint(leftConstraint!);
 		}
 		let topConstraint = pinWithConstraint(viewToPinTo,
-		                                      attribute: NSLayoutAttribute.Top,
+		                                      attribute: NSLayoutAttribute.top,
 		                                      constant: insets.top);
 		if (topConstraint != nil) {
 			constraints.append(topConstraint!);
 			viewToPinTo.addConstraint(topConstraint!);
 		}
 		let rightConstraint = pinWithConstraint(viewToPinTo,
-		                                        attribute: NSLayoutAttribute.Right,
+		                                        attribute: NSLayoutAttribute.right,
 		                                        constant: insets.right);
 		if (rightConstraint != nil) {
 			constraints.append(rightConstraint!);
 			viewToPinTo.addConstraint(rightConstraint!);
 		}
 		let bottomConstraint = pinWithConstraint(viewToPinTo,
-		                                         attribute: NSLayoutAttribute.Bottom,
+		                                         attribute: NSLayoutAttribute.bottom,
 		                                         constant: insets.bottom);
 		if (bottomConstraint != nil) {
 			constraints.append(bottomConstraint!);
@@ -345,12 +345,12 @@ public extension UIView {
 		return addHeightConstraint(self.bounds.height);
 	}
 	
-	func addHeightConstraint(height: CGFloat) -> NSLayoutConstraint? {
+	func addHeightConstraint(_ height: CGFloat) -> NSLayoutConstraint? {
 		return NSLayoutConstraint(item: self,
-		                          attribute: NSLayoutAttribute.Height,
-		                          relatedBy: NSLayoutRelation.Equal,
+		                          attribute: NSLayoutAttribute.height,
+		                          relatedBy: NSLayoutRelation.equal,
 		                          toItem: nil,
-		                          attribute: NSLayoutAttribute.NotAnAttribute,
+		                          attribute: NSLayoutAttribute.notAnAttribute,
 		                          multiplier: 1.0,
 		                          constant: height);
 	}
@@ -359,12 +359,12 @@ public extension UIView {
 		return addWidthConstraint(self.bounds.width);
 	}
 	
-	func addWidthConstraint(width: CGFloat) -> NSLayoutConstraint? {
+	func addWidthConstraint(_ width: CGFloat) -> NSLayoutConstraint? {
 		return NSLayoutConstraint(item: self,
-		                          attribute: NSLayoutAttribute.Width,
-		                          relatedBy: NSLayoutRelation.Equal,
+		                          attribute: NSLayoutAttribute.width,
+		                          relatedBy: NSLayoutRelation.equal,
 		                          toItem: nil,
-		                          attribute: NSLayoutAttribute.NotAnAttribute,
+		                          attribute: NSLayoutAttribute.notAnAttribute,
 		                          multiplier: 1.0,
 		                          constant: width);
 	}
@@ -373,7 +373,7 @@ public extension UIView {
 		return addSizeConstraints(self.bounds.size);
 	}
 	
-	func addSizeConstraints(size: CGSize) -> [NSLayoutConstraint] {
+	func addSizeConstraints(_ size: CGSize) -> [NSLayoutConstraint] {
 		var constraints = [NSLayoutConstraint]();
 		let widthConstraint = addWidthConstraint(size.width);
 		if (widthConstraint != nil) {
@@ -388,40 +388,40 @@ public extension UIView {
 		return constraints;
 	}
 	
-	func addSizeConstraints(width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
+	func addSizeConstraints(_ width: CGFloat, height: CGFloat) -> [NSLayoutConstraint] {
 		return addSizeConstraints(CGSize(width: width, height: height));
 	}
 	
-	func addAspectConstraint(x: CGFloat, y: CGFloat) -> NSLayoutConstraint {
+	func addAspectConstraint(_ x: CGFloat, y: CGFloat) -> NSLayoutConstraint {
 		let constraint = NSLayoutConstraint(item: self,
-		                                    attribute: .Width,
-		                                    relatedBy: .Equal,
+		                                    attribute: .width,
+		                                    relatedBy: .equal,
 		                                    toItem: self,
-		                                    attribute: .Height,
+		                                    attribute: .height,
 		                                    multiplier: x / y,
 		                                    constant: 0.0);
 		self.addConstraint(constraint);
 		return constraint;
 	}
 	
-	func addSpacingConstraint(otherView: UIView, spacingToAttribute: NSLayoutAttribute, constant: CGFloat = 0.0, multiplier: CGFloat = 1.0) -> NSLayoutConstraint? {
-		var selfAttribute = NSLayoutAttribute.NotAnAttribute;
+	func addSpacingConstraint(_ otherView: UIView, spacingToAttribute: NSLayoutAttribute, constant: CGFloat = 0.0, multiplier: CGFloat = 1.0) -> NSLayoutConstraint? {
+		var selfAttribute = NSLayoutAttribute.notAnAttribute;
 		
-		if (spacingToAttribute == NSLayoutAttribute.Left) {
-			selfAttribute = NSLayoutAttribute.Right;
-		} else if (spacingToAttribute == NSLayoutAttribute.Top) {
-			selfAttribute = NSLayoutAttribute.Bottom;
-		} else if (spacingToAttribute == NSLayoutAttribute.Right) {
-			selfAttribute = NSLayoutAttribute.Left;
-		} else if (spacingToAttribute == NSLayoutAttribute.Bottom) {
-			selfAttribute = NSLayoutAttribute.Top;
+		if (spacingToAttribute == NSLayoutAttribute.left) {
+			selfAttribute = NSLayoutAttribute.right;
+		} else if (spacingToAttribute == NSLayoutAttribute.top) {
+			selfAttribute = NSLayoutAttribute.bottom;
+		} else if (spacingToAttribute == NSLayoutAttribute.right) {
+			selfAttribute = NSLayoutAttribute.left;
+		} else if (spacingToAttribute == NSLayoutAttribute.bottom) {
+			selfAttribute = NSLayoutAttribute.top;
 		} else {
 			return nil;
 		}
 		
 		let constraint = NSLayoutConstraint(item: otherView,
 		                                    attribute: spacingToAttribute,
-		                                    relatedBy: NSLayoutRelation.Equal,
+		                                    relatedBy: NSLayoutRelation.equal,
 		                                    toItem: self,
 		                                    attribute: selfAttribute,
 		                                    multiplier: multiplier,

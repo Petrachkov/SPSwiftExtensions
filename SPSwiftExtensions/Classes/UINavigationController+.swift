@@ -9,13 +9,13 @@
 import UIKit
 
 public extension UINavigationController {
-	func pushViewControllerMoveInFromDown(viewController: UIViewController) {
+	func pushViewControllerMoveInFromDown(_ viewController: UIViewController) {
 		let transition = CATransition();
 		transition.duration = 0.3;
 		transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut);
 		transition.type = kCATransitionPush;
 		transition.subtype = kCATransitionFromTop;
-		self.view.layer.addAnimation(transition, forKey: nil);
+		self.view.layer.add(transition, forKey: nil);
 		self.pushViewController(viewController, animated: false);
 	}
 }

@@ -24,10 +24,9 @@ public enum ScreenType: String {
 	/// Unrecognized screen size
 	case unrecognized
 }
-
 public extension UIDevice {
 	var iPhone: Bool {
-		return UIDevice().userInterfaceIdiom == .Phone
+		return UIDevice().userInterfaceIdiom == .phone
 	}
 	
 	
@@ -36,7 +35,7 @@ public extension UIDevice {
 	var screenType: ScreenType {
 		guard iPhone else { return ScreenType.unrecognized; }
 		
-		let mainScreen = UIScreen.mainScreen();
+		let mainScreen = UIScreen.main;
 		
 		let isIOS8OrLater = SYSTEM_VERSION_GREATER_THAN("8.0");
 		let screenBoundsHeight = mainScreen.bounds.height;
@@ -67,28 +66,28 @@ public extension UIDevice {
 		}
 	}
 	
-	func SYSTEM_VERSION_EQUAL_TO(version: String) -> Bool {
-		return UIDevice.currentDevice().systemVersion.compare(version,
-		                                                      options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedSame
+	func SYSTEM_VERSION_EQUAL_TO(_ version: String) -> Bool {
+		return UIDevice.current.systemVersion.compare(version,
+		                                              options: NSString.CompareOptions.numeric) == ComparisonResult.orderedSame
 	}
 	
-	func SYSTEM_VERSION_GREATER_THAN(version: String) -> Bool {
-		return UIDevice.currentDevice().systemVersion.compare(version,
-		                                                      options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedDescending
+	func SYSTEM_VERSION_GREATER_THAN(_ version: String) -> Bool {
+		return UIDevice.current.systemVersion.compare(version,
+		                                              options: NSString.CompareOptions.numeric) == ComparisonResult.orderedDescending
 	}
 	
-	func SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(version: String) -> Bool {
-		return UIDevice.currentDevice().systemVersion.compare(version,
-		                                                      options: NSStringCompareOptions.NumericSearch) != NSComparisonResult.OrderedAscending
+	func SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(_ version: String) -> Bool {
+		return UIDevice.current.systemVersion.compare(version,
+		                                              options: NSString.CompareOptions.numeric) != ComparisonResult.orderedAscending
 	}
 	
-	func SYSTEM_VERSION_LESS_THAN(version: String) -> Bool {
-		return UIDevice.currentDevice().systemVersion.compare(version,
-		                                                      options: NSStringCompareOptions.NumericSearch) == NSComparisonResult.OrderedAscending
+	func SYSTEM_VERSION_LESS_THAN(_ version: String) -> Bool {
+		return UIDevice.current.systemVersion.compare(version,
+		                                              options: NSString.CompareOptions.numeric) == ComparisonResult.orderedAscending
 	}
 	
-	func SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(version: String) -> Bool {
-		return UIDevice.currentDevice().systemVersion.compare(version,
-		                                                      options: NSStringCompareOptions.NumericSearch) != NSComparisonResult.OrderedDescending
+	func SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(_ version: String) -> Bool {
+		return UIDevice.current.systemVersion.compare(version,
+		                                              options: NSString.CompareOptions.numeric) != ComparisonResult.orderedDescending
 	}
 }
