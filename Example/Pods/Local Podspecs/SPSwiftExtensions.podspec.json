@@ -1,0 +1,22 @@
+{
+  "name": "SPSwiftExtensions",
+  "version": "0.4.0",
+  "summary": "SPSwiftExtensions gives you a set of tools to work with standard classes.",
+  "description": "SPSwiftExtensions gives you a set of tools to work with standard classes such as UIDevice, UIView, CGRect, etc",
+  "homepage": "https://github.com/Petrachkov/SPSwiftExtensions",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "sergey petrachkov": "petrachkovsergey@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/Petrachkov/SPSwiftExtensions.git",
+    "tag": "0.4.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SPSwiftExtensions/Classes/**/*"
+}

@@ -1,0 +1,16 @@
+PODS:
+  - SPSwiftExtensions (0.4.0)
+
+DEPENDENCIES:
+  - SPSwiftExtensions (from `../`)
+
+EXTERNAL SOURCES:
+  SPSwiftExtensions:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SPSwiftExtensions: 2d180488f1996bb0f4300c9cb6c8f988587faa94
+
+PODFILE CHECKSUM: 5b7a7892e6a6282d78b0a13835914cc1cb17c014
+
+COCOAPODS: 1.1.1

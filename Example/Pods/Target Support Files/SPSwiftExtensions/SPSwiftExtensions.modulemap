@@ -1,0 +1,6 @@
+framework module SPSwiftExtensions {
+  umbrella header "SPSwiftExtensions-umbrella.h"
+
+  export *
+  module * { export * }
+}
